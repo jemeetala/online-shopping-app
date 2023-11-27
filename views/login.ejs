@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        /* CSS */
+        body {
+            /* background: linear-gradient(45deg,
+                    hsl(312deg 100% 20%) 0%,
+                    hsl(336deg 53% 34%) 13%,
+                    hsl(352deg 46% 42%) 25%,
+                    hsl(3deg 46% 47%) 37%,
+                    hsl(10deg 54% 49%) 50%,
+                    hsl(15deg 65% 51%) 63%,
+                    hsl(19deg 77% 52%) 75%,
+                    hsl(22deg 89% 53%) 87%,
+                    hsl(27deg 100% 50%) 100%) no-repeat; */
+            height: 100vh;
+        }
+        .form-control:focus {
+    border-color: red;
+    box-shadow: 0 0 0 0.2rem rgba(211, 82, 102, 0.3);
+}
+input:-webkit-autofill { 
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: green;
+}
+input:-webkit-autofill:focus { 
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: green;
+}
+    </style>
+</head>
+
+<body>
+    <!-- HTML -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-danger mb-4">Log In</h2>
+                        <% if (error && error.length > 0) { %>
+                            <div style="color: red;"><%= error %></div>
+                          <% } %>
+                         
+                        <form action="/auth/login" method="post">
+                            <div class="form-group">
+                                <input type="text" id="username" name="username" class="form-control" placeholder="username" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password"   id="password" name="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-block">Log In</button>
+                            </div>
+                            <div class="form-group">
+                                <p class="mb-0 text-center">Don't have an account?</p>
+                                <a href="/auth/signup" class="btn btn-outline-danger  btn-block">Register</a>
+                            </div>
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

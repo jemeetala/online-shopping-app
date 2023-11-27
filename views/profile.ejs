@@ -1,0 +1,154 @@
+<!-- <h1>Your Profile</h1>
+
+<p>Name: <%= user.username %></p>
+<p>Email: <%= user.email %></p>
+
+<h2>Update Profile</h2>
+
+<form action="/auth/profile/update" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="username" value="<%= user.username %>" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" value="<%= user.email %>" required>
+
+
+  <button type="submit">Update Profile</button>
+</form> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link rel="stylesheet" href="/assets/css/style.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+   <title>Bag Product</title>
+   <style>       /* CSS */
+   
+
+       
+        .form-control:focus {
+    border-color: red;
+    box-shadow: 0 0 0 0.2rem rgba(211, 82, 102, 0.3);
+}
+        input:-webkit-autofill { 
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: green;
+}
+input:-webkit-autofill:focus { 
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: green;
+}</style>
+</head>
+
+<body>
+   <div class="container-lg-fluid">
+    <%- include("header.ejs")%>
+      <main>
+    
+         
+         <div class="container">
+            <div class="sec-1">
+               <div class="grid-header one">
+                  <span><b>My Profile</b></span>
+               </div>
+            </div>
+            <section class="details-sec" style="background-color: #eee;">
+               <div class="container py-5" style=" background-color: #fff;">
+                  <div class="row justify-content-center mb-3">
+                     <div class="col-md-12 col-xl-10">
+                        <form action="/auth/profile/update" method="post" enctype="multipart/form-data">
+
+                        <div class="card shadow-0 border rounded-3">
+                           <div class="card-body">
+                              <div class="row">
+                                 <div class="col-md-12 col-lg-6">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                       <% if (user.images && user.images.length > 0) { %>
+                                       <% user.images.forEach(image => { %>
+                                          <img src="data:image/jpeg;base64,<%= image %>" class="w-100" style="height: 500px; object-fit: cover;"/>
+                                       <% }); %>
+
+                                       <% } else { %>
+                                          <img src="/assets/img/profile.jpg" class="w-100" style="height: 500px; object-fit: cover;"/>
+
+
+                                          <% } %>
+                                       <a href="#!">
+                                          <div class="hover-overlay">
+                                             <div class="mask"
+                                                style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-12 col-lg-6">
+                                    
+                                    <div class="mb-3">
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Edit Profile</label>
+                                            <input type="file" class="form-control" id="images" name="images" accept="image/*"
+                                              >
+                                          </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">FirstName</label>
+                                            <input type="text" class="form-control" id="firstname" name="firstname" value="<%= user.firstname %>" >
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">LastName</label>
+                                            <input type="text" class="form-control" id="lastname" name="lastname" value="<%= user.lastname %>" >
+                                        </div>
+                                        <label for="firstName" class="form-label">User Name</label>
+                                        <input type="text" class="form-control"  id="username" name="username" value="<%= user.username %>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailOrMobile" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                                    </div>
+                                  
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Mobile</label>
+                                        <input type="text" class="form-control" id="mobile" name="mobile" value="<%= user.mobile %>" >
+                                    </div>
+                                 
+                                    <button type="submit" class="btn btn-danger">Update</button>
+                                    <Br></Br>
+                                    <% if (error && error.length > 0) { %>
+                                       <div style="color: blue;"><%= error %></div>
+                                     <% } %>
+                               
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </main>
+     
+      <%- include("footer.ejs") %>
+
+   </div>
+ 
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
+

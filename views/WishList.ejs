@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link rel="stylesheet" href="/assets/css/style.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+   <title>My wishlists</title>
+</head>
+
+<body>
+   <div class="container-lg-fluid">
+      <%- include("header.ejs")%>
+
+      <main class="wishlist-sec">
+         <div class="container">
+            <div class="sec-1">
+               <div class="grid-header one">
+                  <span><b>My wishlists</b></span>
+               </div>
+            </div>
+            <section  style="background-color: #fff;">
+               <div class="container py-5">
+                  <div class="row justify-content-center mb-3">
+                     <div class="col-md-12 col-xl-10">
+                        <% if (wishlistItems.length > 0) { %>
+                           <% wishlistItems.forEach(wishlist => { %>
+                          
+                              <div class="card mb-3">
+                                 <div class="row g-0">
+                                    <div class="col-md-4">
+                                       <img src="data:image/jpeg;base64,<%= wishlist.product_Id.images[0] %>"
+                                          class="img-fluid rounded-start wishlist-img" alt="<%= wishlist.product_Id.title %>">
+                                    </div>
+                                    <div class="col-md-8">
+                                       <div class="card-body">
+                                          <h5 class=""><%= wishlist.product_Id.title %></h5>
+                                          <p class="card-text"><%= wishlist.product_Id.description %></p>
+                                          <div class="mb-2 text-muted small">
+                                            <span>Price: $<%= wishlist.product_Id.price.toFixed(2) %></span>
+                                         </div>
+                                         <p class="text-truncate mb-4 mb-md-0">
+                                            <span>Material:</span><div class="mb-2 text-muted small"> <%= wishlist.product_Id.material %></div>
+                                         </p>
+                                         <p class="text-truncate mb-4 mb-md-0">
+                                            <span>Size:</span><div class="mb-2 text-muted small"> <%= wishlist.product_Id.size %></div>
+                                         </p>
+                                         <p class="text-truncate mb-4 mb-md-0">
+                                            <span>Weight:</span><div class="mb-2 text-muted small"> <%= wishlist.product_Id.weight %></div>
+                                         </p>
+                                          <form action="/wishlist/delete-wishlist/<%= wishlist._id %>" method="post">
+                                             <button class="btn btn-danger" type="submit">Remove</button>
+                                          </form>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           <% }); %>
+                        <% } else { %>
+                           <div class="empty-order">
+                              <div class="empty-state__icon">
+                                <a href="/product/dashboard"> <img src="/assets/img/empty-wishlist.jpg" style="height: 500px;" alt=""></a>
+                               </div>
+                               
+                           <!-- <p>No wishlists available.</p> -->
+                           <!-- <div class="empty-state">
+                              <div class="empty-state__content"> -->
+                               
+                                <!-- <div class="empty-state__message">No records has been added yet.</div>
+                                <div class="empty-state__help">
+                                  Add a new record by simpley clicking the button on top right side.
+                                </div> -->
+                              <!-- </div>
+                            </div> -->
+                            
+                            <!-- <div class="credit">Illustration by <a href="https://icons8.com/" target="_blank">ICONS8</a>.</div> -->
+                        </div>
+                        <% } %>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </main>
+      <%- include("footer.ejs") %>
+   </div>
+<script>
+  function formatwishlistDate(dateString) {
+     const options = { day: 'numeric', month: 'short', year: 'numeric' };
+     const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+
+     const day = formattedDate.split(' ')[0];
+     const suffix = getDaySuffix(day);
+
+     return formattedDate.replace(/\b\d{1,2}\b/, day + suffix);
+  }
+
+  function getDaySuffix(day) {
+     if (day >= 11 && day <= 13) {
+        return 'th';
+     }
+     switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+     }
+  }
+</script>
+   <!-- Bootstrap and other scripts here -->
+</body>
+
+
+</html>
